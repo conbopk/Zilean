@@ -20,7 +20,7 @@ export async function createSession(req, res) {
             difficulty: difficulty,
             host: userId,
             callId: callId,
-        })
+        });
 
         // create stream video call
         await streamClient.video.call("default", callId).getOrCreate({
@@ -122,8 +122,14 @@ export async function joinSession(req, res) {
         session.participant = userId;
         await session.save();
 
-        const channel = chatClient.channel("messaging", session.callId);
-        await channel.addMembers([clerkId]);
+        try {
+            const channel = chatClient.channel("messaging", session.callId);
+            await channel.addMembers([clerkId]);
+        } catch (e) {
+            session.participant = null;
+            await session.save();
+            throw new Error(`Error add members ${clerkId} in chat channel: ${e}`);
+        }
 
         res.status(200).json({ session });
     } catch (e) {
