@@ -57,7 +57,7 @@ export async function getActiveSessions(_, res) {
 
         res.status(200).json({ sessions });
     } catch (e) {
-        console.log("Error in createSession controller:", e.message);
+        console.log("Error in getActiveSessions controller:", e.message);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
@@ -117,7 +117,7 @@ export async function joinSession(req, res) {
         }
 
         // check if session is already full - has a participant
-        if (session.participant) return res.status(409).json({ message: "Session if full" });
+        if (session.participant) return res.status(409).json({ message: "Session is full" });
 
         session.participant = userId;
         await session.save();

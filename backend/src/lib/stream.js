@@ -3,7 +3,7 @@ import {StreamClient} from "@stream-io/node-sdk";
 import {ENV} from "./env.js";
 
 if (!ENV.STREAM_API_KEY || !ENV.STREAM_SECRET_KEY) {
-    console.error("STREAM_API_KEY or STREAM_SECRET_KEY is missing");
+    throw new Error("STREAM_API_KEY or STREAM_SECRET_KEY is missing");
 }
 
 export const chatClient = StreamChat.getInstance(ENV.STREAM_API_KEY, ENV.STREAM_SECRET_KEY);    // will be used for chat feature
