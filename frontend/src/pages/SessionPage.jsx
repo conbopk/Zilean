@@ -41,7 +41,6 @@ export default function SessionPage() {
   // update code when problem loads or change
   useEffect(() => {
     if (problemData?.starterCode?.[selectedLanguage]) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCode(problemData.starterCode[selectedLanguage]);
     }
   }, [problemData, selectedLanguage]);

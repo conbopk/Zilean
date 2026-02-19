@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router";
 import {toast} from "react-hot-toast";
 import confetti from "canvas-confetti";
 import {Group, Panel, Separator} from "react-resizable-panels";
+
 import {PROBLEMS} from "../data/problems.js";
 import {executeCode} from "../lib/piston.js";
 import OutputPanel from "../components/OutputPanel.jsx";
